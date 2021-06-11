@@ -3,6 +3,7 @@ import UIKit
 import NetworkExtension
 
 public class SwiftFlutterOpenvpnPlugin: NSObject, FlutterPlugin {
+    private var connected : Bool = false;
     private static var utils : VPNUtils!;
     private static var channel : FlutterMethodChannel!;
   public static func register(with registrar: FlutterPluginRegistrar) {
@@ -56,7 +57,8 @@ public class SwiftFlutterOpenvpnPlugin: NSObject, FlutterPlugin {
 
                 
                 if success == nil {
-                   result(nil)
+                    connected = true;
+                    result(nil)
                 } else {
                     result(FlutterError(code: "-5", message: success?.localizedDescription, details: success.debugDescription))
                 }
@@ -67,7 +69,12 @@ public class SwiftFlutterOpenvpnPlugin: NSObject, FlutterPlugin {
         }
         if call.method == "stop" {
             SwiftFlutterOpenvpnPlugin.utils.stopVPN();
+            connected = false;
             result(nil)
+        }
+        
+        if call.method == "checkConnected" {
+            result(connected)
         }
     }catch let exception {
         result(FlutterError(code: "-2", message: "Unknown error", details: exception.localizedDescription));

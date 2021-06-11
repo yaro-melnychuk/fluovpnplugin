@@ -44,6 +44,8 @@ class FlutterOpenvpn {
   /// "expireAt" : "VPN_EXPIRE_DATE_STRING_IN_FORMAT(yyyy-MM-dd HH:mm:ss)",} if successful
   ///
   ///  returns null if failed
+  
+
   static Future<dynamic> init(
       {String providerBundleIdentifier, String localizedDescription}) async {
     dynamic isInited = await _channel.invokeMethod("init", {
@@ -128,5 +130,10 @@ class FlutterOpenvpn {
   /// stops any connected session.
   static Future<void> stopVPN() async {
     await _channel.invokeMethod("stop");
+  }
+  
+  static Future<bool> get checkConnected async {
+    final bool _checkConnection = await _channel.invokeMethod("checkConnected");
+    return _checkConnection;
   }
 }
