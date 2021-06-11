@@ -125,7 +125,7 @@ public class FlutterOpenvpnPlugin implements FlutterPlugin, MethodCallHandler, A
         connected = false;
         result.success(null);
       }else if(call.method.equals("checkConnected")) {
-          result(connected);
+          result.success(connected);
       }
     }catch (Exception err){
       result.error("-10",err.toString(),"UnExpected error");
