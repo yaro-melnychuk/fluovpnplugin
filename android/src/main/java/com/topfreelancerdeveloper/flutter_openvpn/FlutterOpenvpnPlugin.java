@@ -119,7 +119,7 @@ public class FlutterOpenvpnPlugin implements FlutterPlugin, MethodCallHandler, A
         vpn.launchVPN(config , expireAt, user, pass);
 
       }else if(call.method.equals("stop")){
-        vpn.init();
+        vpn.stopVpn();
         result.success(null);
       }else if(call.method.equals("checkConnected")) {
           result.success(vpn.vpnStart);
