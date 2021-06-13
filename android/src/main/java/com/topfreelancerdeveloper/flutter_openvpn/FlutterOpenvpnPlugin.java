@@ -41,7 +41,6 @@ public class FlutterOpenvpnPlugin implements FlutterPlugin, MethodCallHandler, A
   ///
   /// This local reference serves to register the plugin with the Flutter Engine and unregister it
   /// when the Flutter Engine is detached from the Activity
-  private boolean connected = false;
   private MethodChannel channel;
   private static  OboloiVPN vpn;
   static private Activity activity;
@@ -118,14 +117,12 @@ public class FlutterOpenvpnPlugin implements FlutterPlugin, MethodCallHandler, A
           }
         });
         vpn.launchVPN(config , expireAt, user, pass);
-        connected = true;
 
       }else if(call.method.equals("stop")){
         vpn.init();
-        connected = false;
         result.success(null);
       }else if(call.method.equals("checkConnected")) {
-          result.success(connected);
+          result.success(vpn.vpnStart);
       }
     }catch (Exception err){
       result.error("-10",err.toString(),"UnExpected error");
