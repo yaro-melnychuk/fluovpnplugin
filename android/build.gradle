@@ -36,7 +36,7 @@ android {
         disable 'InvalidPackage'
     }
     dependencies {
-        implementation 'com.github.Letal1s:fluovpnplugindep:eae0c95bb5'
+        implementation 'com.github.Letal1s:fluovpnplugindep:87d7d73e41'
     }
 
 }
